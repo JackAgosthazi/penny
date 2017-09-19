@@ -5,6 +5,7 @@
     "angular-ui-bootstrap": "^2.5.0",
     "angularfire": "^1.0.0",
     "bootstrap": "^3.3.7",
+    "firebaseui": "^2.3.0",
     "todomvc-app-css": "^1.0.1",
     "todomvc-common": "^1.0.1"
   }

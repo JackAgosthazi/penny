@@ -1,4 +1,12 @@
 <meta name="viewport" content="initial-scale=1.0,width=device-width"/>
 <div class="smiley-page">
-  <h1>Hello World!</h1>
+  <div class="smiley-container" ng-if="mode == 'main'">
+    <div class="happy-face" ng-click="smileyClicked('penny-happy')">Happy Face</div>
+    <div class="sad-face" ng-click="smileyClicked('penny-sad')">Sad Face</div>
+  </div>
+  
+  <div class="tags-container"  ng-if="mode == 'tagList'">
+    <div ng-repeat="tag in tags" class="tag-item"><span>{{tag}}</span></div>
+    <div ng-click="addTag()" class="tag-item"><span>+ Add</span></div>
+  </div>
 </div>

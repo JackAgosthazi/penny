@@ -19,7 +19,8 @@ penny.config(function ($stateProvider, $urlRouterProvider) {
       template: "<div id=\"firebaseui-auth-container\"></div>"
     }).state('smiley', {
       url: "/smiley",
-      templateUrl: "./views/smiley.html"
+      templateUrl: "./views/smiley.html",
+      controller: 'SmileyCtrl'
     })
 });
 

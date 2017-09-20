@@ -1,0 +1,52 @@
+.smiley-page{
+    
+}
+
+.smiley-page .smiley-container{
+    width: 400px;
+    height: 500px;
+    
+    font-size: 40px;
+}
+
+.smiley-page .happy-face, .smiley-page .sad-face{
+    color: white;
+    height: 50%;
+    text-align: center;
+    padding-top: 28%;
+}
+
+.smiley-page .happy-face{
+    background-color: green;
+}
+
+.smiley-page .sad-face{
+    background-color: red;
+}
+
+.smiley-page .tags-container{
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.smiley-page .tags-container .tag-item{
+    text-align: center;
+    flex: 1;
+}
+
+.smiley-page .tags-container .tag-item span{
+    border: 2px solid white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    display: block;
+    margin-top: 50%;
+}
+

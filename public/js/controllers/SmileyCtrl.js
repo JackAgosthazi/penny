@@ -2,12 +2,15 @@
 
 penny.controller('SmileyCtrl', function MainCtrl($scope, $location, $firebaseArray) {
 	console.log('SmileyCtrl');
-
+	
+	var url = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
+	var fireRef = new Firebase(url);
+	var eventsArray = $firebaseArray(fireRef);
+	
 	$scope.tags = ['Angry', 'Sad', 'Jealous', 'Frustrated'];
 	$scope.mode = 'main';
 	
 	$scope.smileyClicked = function(type){
-		console.log('type: ', type);
 		
 		if(type == 'penny-happy'){
 			logEvent('penny-happy');
@@ -22,15 +25,18 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $location, $firebaseArr
 	
 	
 	function logEvent(type){
+		console.log('log type: ', type);
+		
+		var event = {
+			type,
+			time: new Date().getTime()
+		};
+
+		eventsArray.$add(event).then(function(ref) {
+			var id = ref.key();
+			console.log("added record with id " + id);
+		});
 		
 	}
-	
-	//var url = 'https://todomvc-angular.firebaseio.com/todos';
-	//var fireRef = new Firebase(url);
-  //
-	//// Bind the todos to the firebase provider.
-	//$scope.todos = $firebaseArray(fireRef);
-	//$scope.newTodo = '';
-	//$scope.editedTodo = null;
 	
 });

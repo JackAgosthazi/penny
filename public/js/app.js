@@ -60,7 +60,10 @@ firebase.auth().onAuthStateChanged(function (user) {
     // Sign out operation. Reset the current user UID.  
     currentUid = null;
     console.log("no user signed in");
-    location.href = '/#!/login';
+    if(location.search.indexOf('mode=select') == -1){
+      location.href = '/#!/login';  
+    }
+    
     // The start method will wait until the DOM is loaded.  
     ui.start('#firebaseui-auth-container', uiConfig);
   }

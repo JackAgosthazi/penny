@@ -33,7 +33,7 @@
 </head>
 <body ng-controller="MainCtrl">
 
-<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</div>
+<div uib-alert ng-repeat="alert in alerts" ng-cloak ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</div>
 
 <div class="ui-view"></div>
 

@@ -33,7 +33,9 @@
 </head>
 <body ng-controller="MainCtrl">
 
-<div ui-view></div>
+<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</div>
+
+<div class="ui-view"></div>
 
 
 <!-- update the version number as needed -->

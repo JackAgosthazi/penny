@@ -1,6 +1,6 @@
 'use strict';
 
-penny.controller('SmileyCtrl', function MainCtrl($scope, $location, $firebaseArray) {
+penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray) {
 	console.log('SmileyCtrl');
 	
 	var url = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
@@ -34,7 +34,13 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $location, $firebaseArr
 
 		eventsArray.$add(event).then(function(ref) {
 			var id = ref.key();
-			console.log("added record with id " + id);
+			
+			// make standard type human-readable
+			if(type == 'penny-happy'){
+				type = 'Happy';
+			}
+			
+			$rootScope.alerts.push({ type: 'success', msg: `Successfully logged ${type} emotion`});
 		});
 		
 	}

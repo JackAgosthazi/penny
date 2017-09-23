@@ -6,8 +6,7 @@
   </div>
   
   <div class="tags-container"  ng-if="mode == 'tagList'">
-    <div ng-repeat="tag in tags" class="tag-item" ng-click="smileyClicked(tag)"><span>{{tag}}</span></div>
-    <div ng-repeat="item in messages" class="tag-item" ng-click="smileyClicked(tag)"><span>{{item}}</span></div>
+    <div ng-repeat="tag in tags track by $index" class="tag-item" ng-click="smileyClicked(tag)"><span>{{tag}}</span></div>
     <div ng-click="addTag()" class="tag-item"><span>+ Add</span></div>
   </div>
 </div>

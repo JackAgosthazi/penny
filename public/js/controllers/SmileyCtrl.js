@@ -3,12 +3,24 @@
 penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray) {
 	console.log('SmileyCtrl');
 	
-	var url = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
-	var fireRef = new Firebase(url);
-	var eventsArray = $firebaseArray(fireRef);
+	var eventsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
+	var eventsRef = new Firebase(eventsUrl);
+	var eventsArray = $firebaseArray(eventsRef);
+
+	var emotionsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/emotions`;
+	var emotionsRef = new Firebase(emotionsUrl);
+	var emotionsArray = $firebaseArray(emotionsRef);
 	
-	$scope.tags = ['Angry', 'Sad', 'Jealous', 'Frustrated'];
+	const standardEmotions = ['Angry', 'Sad', 'Jealous', 'Frustrated'];
+	
+	$scope.tags = _.cloneDeep(standardEmotions);
 	$scope.mode = 'main';
+
+	// add custom emotions once they loaded
+	emotionsArray.$loaded()
+		.then(function(data) {
+			$scope.tags = _.cloneDeep(standardEmotions).concat(_.map(data, 'name'))
+		});
 	
 	$scope.smileyClicked = function(type){
 		
@@ -20,9 +32,25 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
 		}else{
 			logEvent(type);
 		}
-		
 	};
 	
+	$scope.addTag = function(){
+		var name = prompt("What should the new emotion be?", "Bummed out");
+		var emotion = {
+			name: name,
+			type: 'negative'
+		};
+		
+		if (name != null && name != "") {
+			emotionsArray.$add(emotion).then(function() {
+				$rootScope.alerts.push({ type: 'success', msg: `Added new emotion: ${name}`});
+
+				$scope.tags = _.cloneDeep(standardEmotions).concat(_.map(emotionsArray, 'name'));
+				
+				// TODO: reload tags
+			});
+		}
+	};
 	
 	function logEvent(type){
 		console.log('log type: ', type);
@@ -32,15 +60,14 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
 			time: new Date().getTime()
 		};
 
-		eventsArray.$add(event).then(function(ref) {
-			var id = ref.key();
+		eventsArray.$add(event).then(function() {
 			
 			// make standard type human-readable
 			if(type == 'penny-happy'){
 				type = 'Happy';
 			}
 			
-			$rootScope.alerts.push({ type: 'success', msg: `Successfully logged ${type} emotion`});
+			$rootScope.alerts.push({ type: 'success', msg: `Logged ${type} emotion`});
 		});
 		
 	}

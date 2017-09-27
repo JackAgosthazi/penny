@@ -21,6 +21,10 @@ penny.config(function ($stateProvider, $urlRouterProvider) {
       url: "/smiley",
       templateUrl: "./views/smiley.html",
       controller: 'SmileyCtrl'
+    }).state('negative', {
+      url: "/negative",
+      templateUrl: "./views/negative.html",
+      controller: 'SmileyCtrl'
     })
 });
 

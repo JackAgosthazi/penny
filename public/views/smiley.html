@@ -1,12 +1,7 @@
 <meta name="viewport" content="initial-scale=1.0,width=device-width"/>
 <div class="smiley-page">
-  <div class="smiley-container" ng-if="mode == 'main'">
+  <div class="smiley-container">
     <div class="happy-face" ng-click="smileyClicked('penny-happy')"><i class="fa fa-smile-o" aria-hidden="true"></i></div>
     <div class="sad-face" ng-click="smileyClicked('penny-sad')"><i class="fa fa-frown-o" aria-hidden="true"></i></div>
-  </div>
-  
-  <div class="tags-container"  ng-if="mode == 'tagList'">
-    <div ng-repeat="tag in tags track by $index" class="tag-item" ng-click="smileyClicked(tag)"><span>{{tag}}</span></div>
-    <div ng-click="addTag()" class="tag-item"><span>+ Add</span></div>
   </div>
 </div>

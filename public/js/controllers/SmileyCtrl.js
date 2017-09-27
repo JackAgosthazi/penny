@@ -1,6 +1,6 @@
 'use strict';
 
-penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray) {
+penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray, $state) {
 	console.log('SmileyCtrl');
 	
 	var eventsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
@@ -14,7 +14,6 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
 	const standardEmotions = ['Angry', 'Sad', 'Jealous', 'Frustrated'];
 	
 	$scope.tags = _.cloneDeep(standardEmotions);
-	$scope.mode = 'main';
 
 	// add custom emotions once they loaded
 	emotionsArray.$loaded()
@@ -28,7 +27,7 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
 			logEvent('penny-happy');
 		}else if(type == 'penny-sad'){
 			// open sad options
-			$scope.mode = 'tagList';
+			$state.go('negative');
 		}else{
 			logEvent(type);
 		}
@@ -68,8 +67,8 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
 			}
 			
 			$rootScope.alerts.push({ type: 'success', msg: `Logged ${type} emotion`});
+			$state.go('smiley');
 		});
-		
 	}
 	
 });

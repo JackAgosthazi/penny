@@ -1,0 +1,7 @@
+<meta name="viewport" content="initial-scale=1.0,width=device-width"/>
+<div class="smiley-page">
+  <div class="tags-container">
+    <div ng-repeat="tag in tags track by $index" class="tag-item" ng-click="smileyClicked(tag)"><span>{{tag}}</span></div>
+    <div ng-click="addTag()" class="tag-item"><span>+ Add</span></div>
+  </div>
+</div>

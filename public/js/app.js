@@ -59,11 +59,9 @@ firebase.auth().onAuthStateChanged(function (user) {
     // Otherwise ignore if this is a token refresh.  
     // Update the current user UID.  
     currentUid = user.uid;
-    console.log('Logged in user: ', user);
   } else {
     // Sign out operation. Reset the current user UID.  
     currentUid = null;
-    console.log("no user signed in");
     if(location.search.indexOf('mode=select') == -1){
       location.href = '/#!/login';  
     }

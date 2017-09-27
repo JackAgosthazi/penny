@@ -9,10 +9,12 @@
 }
 
 .smiley-page .happy-face, .smiley-page .sad-face{
-    color: white;
     height: 50%;
+    
     text-align: center;
     padding-top: 34%;
+    
+    color: white;
     font-size: 70px;
 }
 
@@ -25,7 +27,9 @@
 }
 
 .smiley-page .tags-container{
-    height: 100%;
+    min-height: 100%;
+    
+    padding: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,16 +41,22 @@
 }
 
 .smiley-page .tags-container .tag-item{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex: 1;
+    flex-basis: 70px;
 }
 
 .smiley-page .tags-container .tag-item span{
+    display: block;
+    min-width: 180px;
+    
     border: 2px solid white;
     border-radius: 4px;
     padding: 5px 10px;
-    display: block;
-    margin-top: 50%;
+    
+    text-align: center;
     cursor: pointer;
 }
 

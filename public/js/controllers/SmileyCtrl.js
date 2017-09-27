@@ -1,7 +1,6 @@
 'use strict';
 
 penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray, $state) {
-	console.log('SmileyCtrl');
 	
 	var eventsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
 	var eventsRef = new Firebase(eventsUrl);

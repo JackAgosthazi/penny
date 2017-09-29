@@ -19,6 +19,20 @@ body {
     width: 100%;
 }
 
+.navbar{
+    margin: 0;
+    border: none;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+}
+
+.main-view{
+    height: calc(100% - 49px);
+    position: relative;
+    top: 49px;
+}
+
 @media (max-width: 600px) {
 
 }

@@ -33,12 +33,12 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
   $scope.smileyClicked = function (type) {
 
     if (type == 'penny-happy') {
-      logEvent('penny-happy');
+      logEvent('penny-happy', 'positive');
     } else if (type == 'penny-sad') {
       // open sad options
       $state.go('negative');
     } else {
-      logEvent(type);
+      logEvent(type, 'negative');
     }
   };
 
@@ -60,20 +60,21 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
     }
   };
 
-  function logEvent(type) {
+  function logEvent(name, type) {
     var event = {
+      name,
       type,
       time: new Date().getTime()
     };
 
     eventsArray.$add(event).then(function () {
 
-      // make standard type human-readable
-      if (type == 'penny-happy') {
-        type = 'Happy';
+      // make standard name human-readable
+      if (name == 'penny-happy') {
+        name = 'Happy';
       }
 
-      $rootScope.alerts.push({type: 'success', msg: `Logged ${type} emotion`});
+      $rootScope.alerts.push({type: 'success', msg: `Logged ${name} emotion`});
       $state.go('smiley');
     });
   }

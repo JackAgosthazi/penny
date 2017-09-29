@@ -25,6 +25,10 @@ penny.config(function ($stateProvider, $urlRouterProvider) {
       url: "/negative",
       templateUrl: "./views/negative.html",
       controller: 'SmileyCtrl'
+    }).state('stats', {
+      url: "/stats",
+      templateUrl: "./views/stats.html",
+      controller: 'StatsCtrl'
     })
 });
 

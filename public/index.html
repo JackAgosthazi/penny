@@ -37,7 +37,24 @@
 
 <div uib-alert ng-repeat="alert in alerts" ng-cloak ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}}</div>
 
-<div class="ui-view"></div>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="smiley" ng-click="isNavCollapsed = true">Logger</a></li>
+            <li><a ui-sref="stats" ng-click="isNavCollapsed = true">Stats</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="ui-view main-view"></div>
 
 
 <!-- update the version number as needed -->
@@ -63,6 +80,7 @@
 <script src="js/angular-ui-router.min.js"></script>
 <script src="js/controllers/MainCtrl.js"></script>
 <script src="js/controllers/SmileyCtrl.js"></script>
+<script src="js/controllers/StatsCtrl.js"></script>
 <script src="js/directives/longPress.js"></script>
 
 </body>

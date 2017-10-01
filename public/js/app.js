@@ -55,6 +55,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 var currentUid = null;
 firebase.auth().onAuthStateChanged(function (user) {
+  var navBar = document.getElementById('navbar');
   // onAuthStateChanged listener triggers every time the user ID token changes.  
   // This could happen when a new user signs in or signs out.  
   // It could also happen when the current user ID token expires and is refreshed.  
@@ -63,11 +64,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     // Otherwise ignore if this is a token refresh.  
     // Update the current user UID.  
     currentUid = user.uid;
+    if(navBar){
+      navBar.style.display = 'block';
+    }
   } else {
     // Sign out operation. Reset the current user UID.  
     currentUid = null;
     if(location.search.indexOf('mode=select') == -1){
       location.href = '/#!/login';  
+    }
+    if(navBar){
+      navBar.style.display = 'none';
     }
     
     // The start method will wait until the DOM is loaded.  

@@ -37,7 +37,7 @@
 
 <div uib-alert ng-repeat="alert in alerts" ng-cloak ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="3000">{{alert.msg}}</div>
 
-<nav class="navbar navbar-default" role="navigation">
+<nav id="navbar" class="none navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
             <span class="sr-only">Toggle navigation</span>

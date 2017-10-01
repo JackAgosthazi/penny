@@ -14,6 +14,10 @@ body {
     height: 100%;
 }
 
+.none{
+    display: none;
+}
+
 .alert{
     position: absolute;
     width: 100%;

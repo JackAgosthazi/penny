@@ -17,6 +17,14 @@ body {
 .alert{
     position: absolute;
     width: 100%;
+    z-index: 5;
+    height: 50px;
+}
+
+.alert-dismissible .close{
+    top: -6px;
+    width: 30px;
+    height: 30px;
 }
 
 .navbar{

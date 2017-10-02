@@ -5,7 +5,7 @@
 /**
  * ANGULAR CONFIG
  */
-var penny = angular.module('penny', ['firebase', 'ui.bootstrap', 'ui.router']);
+var penny = angular.module('penny', ['ui.bootstrap', 'ui.router']);
 
 penny.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -75,6 +75,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     if(navBar){
       navBar.style.display = 'block';
     }
+    
   } else {
     // Sign out operation. Reset the current user UID.  
     currentUid = null;

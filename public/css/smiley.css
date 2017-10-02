@@ -12,18 +12,18 @@
     height: 50%;
     
     text-align: center;
-    padding-top: 21%;
+    padding-top: 17%;
     
     color: white;
     font-size: 170px;
 }
 
 .smiley-page .happy-face{
-    background-color: green;
+    background-color: #66BB6A;
 }
 
 .smiley-page .sad-face{
-    background-color: red;
+    background-color: #EF5350;
 }
 
 .smiley-page .tags-container{
@@ -34,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     
-    background-color: red;
+    background-color: #EF5350;
     color: white;
     font-size: 20px;
     font-weight: bold;

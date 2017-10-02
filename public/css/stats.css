@@ -63,6 +63,10 @@
     font-size: 16px;
 }
 
+.stats-page .category-breakdown-item {
+    line-height: 26px;
+}
+
 .stats-page .category-breakdown-item .category-value {
     float: right;
     margin-right: 5px;

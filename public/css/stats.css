@@ -57,3 +57,17 @@
     font-size: 18px;
 }
 
+.stats-page .category-breakdown-container {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.stats-page .category-breakdown-item {
+    font-size: 16px;
+}
+
+.stats-page .category-breakdown-item .category-value {
+    float: right;
+    margin-right: 5px;
+}
+

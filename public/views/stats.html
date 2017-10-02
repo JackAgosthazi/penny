@@ -62,7 +62,7 @@
       </uib-accordion-heading>
       
       <div class="category-breakdown-container">
-        <div class=category-breakdown-item" ng-repeat="category in stats.todayMap track by $index">{{category.name}}: {{category.count}}</div>
+        <div class="category-breakdown-item" ng-repeat="category in stats.todayMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
       </div>
     </div>
     
@@ -72,7 +72,7 @@
       </uib-accordion-heading>
       
       <div class="category-breakdown-container">
-        <div class=category-breakdown-item" ng-repeat="category in stats.thisWeekMap track by $index">{{category.name}}: {{category.count}}</div>
+        <div class="category-breakdown-item" ng-repeat="category in stats.thisWeekMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
       </div>
     </div>
     
@@ -82,7 +82,7 @@
       </uib-accordion-heading>
 
       <div class="category-breakdown-container">
-        <div class=category-breakdown-item" ng-repeat="category in stats.thisMonthMap track by $index">{{category.name}}: {{category.count}}</div>
+        <div class="category-breakdown-item" ng-repeat="category in stats.thisMonthMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
       </div>
     </div>
     
@@ -92,7 +92,7 @@
       </uib-accordion-heading>
 
       <div class="category-breakdown-container">
-        <div class=category-breakdown-item" ng-repeat="category in stats.totalMap track by $index">{{category.name}}: {{category.count}}</div>
+        <div class="category-breakdown-item" ng-repeat="category in stats.totalMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
       </div>
     </div>
   </uib-accordion>

@@ -52,10 +52,7 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
     if (name != null && name != "") {
       emotionsArray.$add(emotion).then(function () {
         $rootScope.alerts.push({type: 'success', msg: `Added new emotion: ${name}`});
-
         $scope.tags = emotionsArray;
-
-        // TODO: reload tags
       });
     }
   };

@@ -55,6 +55,14 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 var currentUid = null;
 firebase.auth().onAuthStateChanged(function (user) {
+
+  var isBootstrapped = angular.element(document).injector() !== undefined;
+  if(!isBootstrapped){
+    angular.element(function() {
+      angular.bootstrap(document, ['penny']);
+    });
+  }
+  
   var navBar = document.getElementById('navbar');
   // onAuthStateChanged listener triggers every time the user ID token changes.  
   // This could happen when a new user signs in or signs out.  

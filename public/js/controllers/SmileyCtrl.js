@@ -1,34 +1,21 @@
 'use strict';
 
-penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray, $state) {
+penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $state) {
 
-  var eventsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
-  var eventsRef = new Firebase(eventsUrl);
-  var eventsArray = $firebaseArray(eventsRef);
-
-  var emotionsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/emotions`;
-  var emotionsRef = new Firebase(emotionsUrl);
-  var emotionsArray = $firebaseArray(emotionsRef);
-
-  $scope.tagOnLongPress = function (tag, index) {
+  $scope.tagOnLongPress = function (tag, key) {
     var isRemove = confirm('Would you like to remove this emotion from the list?');
 
     if (isRemove) {
-      emotionsArray.$remove(tag).then(function () {
-        $rootScope.alerts.push({type: 'success', msg: `Removed emotion: ${tag.name}`});
-      });
+      $rootScope.emotionsRef.child(key).remove()
+        .then(function() {
+          $rootScope.emotionsRef.once('value').then(snapshot => {
+            $rootScope.alerts.push({type: 'success', msg: `Removed emotion: ${tag.name}`});
+            $rootScope.tags = snapshot.val();
+            $scope.$apply();
+          });
+        });
     }
   };
-
-  // add custom emotions once they loaded
-  emotionsArray.$loaded()
-    .then(function (data) {
-      if (data.length == 0) {
-        createStandardEmotions();
-      }
-
-      $scope.tags = data;
-    });
 
   $scope.smileyClicked = function (type) {
 
@@ -50,9 +37,12 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
     };
 
     if (name != null && name != "") {
-      emotionsArray.$add(emotion).then(function () {
-        $rootScope.alerts.push({type: 'success', msg: `Added new emotion: ${name}`});
-        $scope.tags = emotionsArray;
+      $rootScope.emotionsRef.push(emotion).then(() => {
+        $rootScope.emotionsRef.once('value').then(snapshot => {
+          $rootScope.alerts.push({type: 'success', msg: `Added new emotion: ${name}`});
+          $rootScope.tags = snapshot.val();
+          $scope.$apply();
+        });
       });
     }
   };
@@ -64,28 +54,17 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
       time: new Date().getTime()
     };
 
-    eventsArray.$add(event).then(function () {
+    $rootScope.eventsRef.push(event).then(() => {
+      $rootScope.eventsRef.once('value').then(() => {
+        // make standard name human-readable
+        if (name == 'penny-happy') {
+          name = 'Happy';
+        }
 
-      // make standard name human-readable
-      if (name == 'penny-happy') {
-        name = 'Happy';
-      }
-
-      $rootScope.alerts.push({type: 'success', msg: `Logged ${name} emotion`});
-      $state.go('smiley');
+        $rootScope.alerts.push({type: 'success', msg: `Logged ${name} emotion`});
+        $state.go('smiley');
+      });
     });
   }
-
-  function createStandardEmotions() {
-    Promise.all([
-      emotionsArray.$add({name: 'Angry', type: 'negative'}),
-      emotionsArray.$add({name: 'Sad', type: 'negative'}),
-      emotionsArray.$add({name: 'Jealous', type: 'negative'}),
-      emotionsArray.$add({name: 'Frustrated', type: 'negative'})
-    ]).then(function (ref) {
-      console.log('Standard emotions created');
-    });
-
-  }
-
+  
 });

@@ -60,9 +60,6 @@
 .stats-page .category-breakdown-container {
     max-height: 400px;
     overflow-y: scroll;
-}
-
-.stats-page .category-breakdown-item {
     font-size: 16px;
 }
 
@@ -71,3 +68,6 @@
     margin-right: 5px;
 }
 
+.stats-page .category-breakdown-nodata {
+    text-align: center;
+}

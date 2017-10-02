@@ -1,15 +1,10 @@
 'use strict';
 
-penny.controller('StatsCtrl', function MainCtrl($scope, $rootScope, $location, $firebaseArray) {
+penny.controller('StatsCtrl', function MainCtrl($scope) {
 	
-	var eventsUrl = `https://penny-for-your-thought.firebaseio.com/users/${currentUid}/events`;
-	var eventsRef = new Firebase(eventsUrl);
-	var eventsArray = $firebaseArray(eventsRef);
-
-	eventsArray.$loaded()
-		.then(function (data) {
-			init(data);
-		});
+	firebase.database().ref(`/users/${currentUid}/events`).once('value').then(snapshot => {
+		init(snapshot.val());
+	});
 	
 	function init(events){
 		var stats = {},
@@ -59,8 +54,9 @@ penny.controller('StatsCtrl', function MainCtrl($scope, $rootScope, $location, $
 		stats.thisMonthMap = getCategoryData(_.filter(thisMonthEvents, {'type': 'negative'}));
 		stats.thisWeekMap = getCategoryData(_.filter(thisWeekEvents, {'type': 'negative'}));
 		stats.todayMap = getCategoryData(_.filter(todayEvents, {'type': 'negative'}));
-		console.log('stats.todayMap: ', stats.todayMap)
+
 		$scope.stats = stats;
+		$scope.$apply();
 	}
 	
 	function getCategoryData(events){

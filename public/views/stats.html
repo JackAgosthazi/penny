@@ -63,6 +63,7 @@
       
       <div class="category-breakdown-container">
         <div class="category-breakdown-item" ng-repeat="category in stats.todayMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
+        <div ng-if="stats.todayMap.length == 0" class="category-breakdown-nodata">No events</div>
       </div>
     </div>
     
@@ -73,6 +74,7 @@
       
       <div class="category-breakdown-container">
         <div class="category-breakdown-item" ng-repeat="category in stats.thisWeekMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
+        <div ng-if="stats.thisWeekMap.length == 0" class="category-breakdown-nodata">No events</div>
       </div>
     </div>
     
@@ -83,6 +85,7 @@
 
       <div class="category-breakdown-container">
         <div class="category-breakdown-item" ng-repeat="category in stats.thisMonthMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
+        <div ng-if="stats.thisMonthMap.length == 0" class="category-breakdown-nodata">No events</div>
       </div>
     </div>
     
@@ -93,6 +96,7 @@
 
       <div class="category-breakdown-container">
         <div class="category-breakdown-item" ng-repeat="category in stats.totalMap track by $index"><span class="category-label">{{category.name}}</span> <span class="category-value">{{category.count}}</span<></div>
+        <div ng-if="stats.totalMap.length == 0" class="category-breakdown-nodata">No events</div>
       </div>
     </div>
   </uib-accordion>

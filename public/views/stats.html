@@ -1,10 +1,100 @@
 <meta name="viewport" content="initial-scale=1.0,width=device-width"/>
 <div class="stats-page">
-  <div>Total positive thoughts: {{totalPositive}}</div>
-  <div>Total negative thoughts: {{totalNegative}}</div>
   
-  Weekly +/-:
-  Daily +/-:
+  <!-- TOTAL TODAY -->
+  <div class="data-tile-row">
+    <div class="data-tile green">
+      <span class="data-tile-value">{{stats.todayPositive}}</span>
+      <div class="data-tile-label">Positive Today</div>
+    </div>
+
+    <div class="data-tile red">
+      <span class="data-tile-value">{{stats.todayNegative}}</span>
+      <div class="data-tile-label">Negative Today</div>
+    </div>
+  </div>
+
+  <!-- TOTAL THIS WEEK -->
+  <div class="data-tile-row">
+    <div class="data-tile green">
+      <span class="data-tile-value">{{stats.thisWeekPositive}}</span>
+      <div class="data-tile-label">This Week</div>
+    </div>
+
+    <div class="data-tile red">
+      <span class="data-tile-value">{{stats.thisWeekNegative}}</span>
+      <div class="data-tile-label">This Week</div>
+    </div>
+  </div>
+
+  <!-- TOTAL THIS MONTH -->
+  <div class="data-tile-row">
+    <div class="data-tile green">
+      <span class="data-tile-value">{{stats.thisMonthPositive}}</span>
+      <div class="data-tile-label">This Month</div>
+    </div>
+
+    <div class="data-tile red">
+      <span class="data-tile-value">{{stats.thisMonthNegative}}</span>
+      <div class="data-tile-label">This Month</div>
+    </div>
+  </div>
+
+  <!-- TOTAL OVERALL -->
+  <div class="data-tile-row">
+    <div class="data-tile green">
+      <span class="data-tile-value">{{stats.totalPositive}}</span>
+      <div class="data-tile-label">Total</div>
+    </div>
+
+    <div class="data-tile red">
+      <span class="data-tile-value">{{stats.totalNegative}}</span>
+      <div class="data-tile-label">Total</div>
+    </div>
+  </div>
   
-  Total negative thoughts by category:
+  <div class="stats-header">Negative Thoughts by Categories</div>
+  
+  <uib-accordion>
+    <div uib-accordion-group class="panel-default" is-open="status.isTodayOpen">
+      <uib-accordion-heading ng-click="status.isTodayOpen = !status.isTodayOpen">
+        Today <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isTodayOpen, 'glyphicon-chevron-right': !status.isTodayOpen}"></i>
+      </uib-accordion-heading>
+      
+      <div class="category-breakdown-container">
+        <div class=category-breakdown-item" ng-repeat="category in stats.todayMap track by $index">{{category.name}}: {{category.count}}</div>
+      </div>
+    </div>
+    
+    <div uib-accordion-group class="panel-default" is-open="status.isThisWeekOpen">
+      <uib-accordion-heading ng-click="status.isTodayOpen = !status.isThisWeekOpen">
+        This Week <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isThisWeekOpen, 'glyphicon-chevron-right': !status.isThisWeekOpen}"></i>
+      </uib-accordion-heading>
+      
+      <div class="category-breakdown-container">
+        <div class=category-breakdown-item" ng-repeat="category in stats.thisWeekMap track by $index">{{category.name}}: {{category.count}}</div>
+      </div>
+    </div>
+    
+    <div uib-accordion-group class="panel-default" is-open="status.isThisMonthOpen">
+      <uib-accordion-heading ng-click="status.isTodayOpen = !status.isThisMonthOpen">
+        This Month <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isThisMonthOpen, 'glyphicon-chevron-right': !status.isThisMonthOpen}"></i>
+      </uib-accordion-heading>
+
+      <div class="category-breakdown-container">
+        <div class=category-breakdown-item" ng-repeat="category in stats.thisMonthMap track by $index">{{category.name}}: {{category.count}}</div>
+      </div>
+    </div>
+    
+    <div uib-accordion-group class="panel-default" is-open="status.isTotalOpen">
+      <uib-accordion-heading ng-click="status.isTotalOpen = !status.isTotalOpen">
+        Total <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isTotalOpen, 'glyphicon-chevron-right': !status.isTotalOpen}"></i>
+      </uib-accordion-heading>
+
+      <div class="category-breakdown-container">
+        <div class=category-breakdown-item" ng-repeat="category in stats.totalMap track by $index">{{category.name}}: {{category.count}}</div>
+      </div>
+    </div>
+  </uib-accordion>
+  
 </div>

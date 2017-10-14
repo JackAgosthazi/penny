@@ -63,6 +63,7 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
 
         $rootScope.alerts.push({type: 'success', msg: `Logged ${name} emotion`});
         $state.go('smiley');
+        $rootScope.$apply();
       });
     });
   }

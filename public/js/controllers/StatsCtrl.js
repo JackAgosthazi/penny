@@ -1,6 +1,6 @@
 'use strict';
 
-penny.controller('StatsCtrl', function MainCtrl($scope) {
+penny.controller('StatsCtrl', function StatsCtrl($scope) {
 	
 	firebase.database().ref(`/users/${currentUid}/events`).once('value').then(snapshot => {
 		init(snapshot.val());

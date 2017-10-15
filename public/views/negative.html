@@ -2,6 +2,19 @@
 <div class="smiley-page">
   <div class="tags-container">
     <div ng-repeat="(key, tag) in tags track by $index" on-long-press="tagOnLongPress(tag, key)" class="tag-item" ng-click="smileyClicked(tag.name)"><span>{{tag.name}}</span></div>
-    <div ng-click="addTag()" class="tag-item"><span>+ Add</span></div>
+    <div ng-click="openAddModal()" class="tag-item"><span>+ Add</span></div>
   </div>
+  
+  <script type="text/ng-template" id="addEmotionModal.html">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">What should the new emotion be?</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <input class="emotion-name" ng-model="$ctrl.emotionName">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+  </script>
 </div>

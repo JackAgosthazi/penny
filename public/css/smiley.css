@@ -60,3 +60,13 @@
     cursor: pointer;
 }
 
+.smiley-page .modal-dialog{
+    margin-top: 50%;
+}
+
+.smiley-page .modal-dialog .emotion-name{
+    border: 1px solid #d4d4d4;
+    width: 100%;
+    line-height: 22px;
+}
+

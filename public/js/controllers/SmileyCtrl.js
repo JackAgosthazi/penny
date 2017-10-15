@@ -1,6 +1,6 @@
 'use strict';
 
-penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, $state) {
+penny.controller('SmileyCtrl', function SmileyCtrl($scope, $rootScope, $location, $state, $uibModal, $document) {
 
   $scope.tagOnLongPress = function (tag, key) {
     var isRemove = confirm('Would you like to remove this emotion from the list?');
@@ -28,9 +28,33 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
       logEvent(type, 'negative');
     }
   };
+  
+  $scope.openAddModal = function () {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      appendTo: angular.element($document[0].querySelector('.smiley-page')),
+      templateUrl: 'addEmotionModal.html',
+      controller: 'ModalInstanceCtrl',
+      controllerAs: '$ctrl',
+      size: 'sm',
+      resolve: {
+        items: function () {
+          return 'hello';
+        }
+      }
+    });
 
-  $scope.addTag = function () {
-    var name = prompt("What should the new emotion be?", "Bummed out");
+    modalInstance.result.then(function (tagName) {
+      // ok click on modal
+      addTag(tagName);
+    }, function () {
+      // cancel click on modal
+    });
+  };
+  
+  function addTag(name) {
     var emotion = {
       name: name,
       type: 'negative'
@@ -45,7 +69,7 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
         });
       });
     }
-  };
+  }
 
   function logEvent(name, type) {
     var event = {
@@ -67,5 +91,16 @@ penny.controller('SmileyCtrl', function MainCtrl($scope, $rootScope, $location, 
       });
     });
   }
-  
+});
+
+penny.controller('ModalInstanceCtrl', function ($uibModalInstance) {
+  var $ctrl = this;
+
+  $ctrl.ok = function () {
+    $uibModalInstance.close($ctrl.emotionName);
+  };
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 });

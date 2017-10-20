@@ -38,6 +38,11 @@
 
 <div uib-alert ng-repeat="alert in alerts" ng-cloak ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="3000">{{alert.msg}}</div>
 
+<div id="login-container">
+    <div class="welcome-msg">Welcome to </br> Penny for Your Thoughts!</div>
+    <div id="firebaseui-auth-container"></div>
+</div>
+
 <nav id="navbar" class="none navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">

@@ -16,7 +16,6 @@ penny.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('login', {
       url: "/login",
-      template: "<div class='welcome-msg'>Welcome to </br> Penny for Your Thoughts!</div><div id=\"firebaseui-auth-container\"></div>"
     }).state('smiley', {
       url: "/smiley",
       templateUrl: "./views/smiley.html",
@@ -43,7 +42,7 @@ var uiConfig = {
   signInSuccessUrl: '/#!/smiley',
   signInOptions: [
     // Specify providers you want to offer your users.  
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID
   ],
   // Terms of service url can be specified and will show up in the widget.  
@@ -58,6 +57,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
   
   var navBar = document.getElementById('navbar');
+  var loginContainer = document.getElementById('login-container');
   // onAuthStateChanged listener triggers every time the user ID token changes.  
   // This could happen when a new user signs in or signs out.  
   // It could also happen when the current user ID token expires and is refreshed.  
@@ -69,6 +69,16 @@ firebase.auth().onAuthStateChanged(function (user) {
     if(navBar){
       navBar.style.display = 'block';
     }
+    if(loginContainer){
+      loginContainer.style.display = 'none';
+    }
+    
+    var isBootstrapped = angular.element(document).injector() !== undefined;
+    if(!isBootstrapped){
+      angular.element(function() {
+        angular.bootstrap(document, ['penny']);
+      });
+    }
     
   } else {
     // Sign out operation. Reset the current user UID.  
@@ -79,15 +89,11 @@ firebase.auth().onAuthStateChanged(function (user) {
     if(navBar){
       navBar.style.display = 'none';
     }
+    if(loginContainer){
+      loginContainer.style.display = 'block';
+    }
     
     // The start method will wait until the DOM is loaded.  
     ui.start('#firebaseui-auth-container', uiConfig);
-  }
-
-  var isBootstrapped = angular.element(document).injector() !== undefined;
-  if(!isBootstrapped){
-    angular.element(function() {
-      angular.bootstrap(document, ['penny']);
-    });
   }
 });

@@ -12,12 +12,14 @@ penny.controller('MainCtrl', function MainCtrl($scope, $rootScope) {
 
 	$rootScope.emotionsRef.once('value').then(snapshot => {
 		const data = snapshot.val();
-
-		if (data == null || data.length == 0) {
+		if (data == null) {
 			createStandardEmotions();
 		}
 		$rootScope.tags = data;
 		$rootScope.$apply();
+	}, err => {
+		console.error(err);
+		location.reload();
 	});
 
 	function createStandardEmotions() {
